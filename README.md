@@ -11,6 +11,10 @@ Microservice demo along with Angular 5 application to connect with those service
 * [Zuul Proxy Server](APIGateway) - Zuul Proxy Server
 * [Authorization Server](AuthServer) - Authorization Server
 
+### Configuration files repository
+The configuration files for the above services are located in the following repository.
+https://github.com/RagavanPV/ConfigurationFiles
+
 ## Authors
 
 * **Ragavan P V** - *Initial work* - [RagavanPV](https://github.com/RagavanPV)
