@@ -8,6 +8,12 @@ Microservice demo along with Angular 5 application to connect with those service
 * [Blog-web](blog-web) - Angular 5 application
 * [Configuration Server](ConfigurationServer) - Spring cloud config server
 * [Eureka Server](DiscoveryServer) - Netflix Eureka server
+* [Zuul Proxy Server](APIGateway) - Zuul Proxy Server
+* [Authorization Server](AuthServer) - Authorization Server
+
+### Configuration files repository
+The configuration files for the above services are located in the following repository.
+https://github.com/RagavanPV/ConfigurationFiles
 
 ## Authors
 
