@@ -1,6 +1,8 @@
 import { customValidators } from './../Validators/custom.validators';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl,Validators } from "@angular/forms";
+import { Http } from '@angular/http';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +11,7 @@ import { FormGroup,FormControl,Validators } from "@angular/forms";
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth: AuthenticationService) { }
 
   ngOnInit() {
   }
@@ -20,8 +22,11 @@ export class LoginComponent implements OnInit {
     isRemember:new FormControl('',Validators.required)
   });
 
-  login(){
+  
+
+  login() {
     console.log(this.loginForm.value);
+    this.auth.login(this.loginForm.value);
   }
   
 }

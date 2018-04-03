@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name = "seed_roles")
 public class SeedRole {
   @Id
-  @GeneratedValue(strategy=GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
   public Long getId() {
@@ -31,16 +31,16 @@ public class SeedRole {
   }
 
   public String getRoleCode() {
-	return roleCode;
-}
+    return roleCode;
+  }
 
-public void setRoleCode(String roleCode) {
-	this.roleCode = roleCode;
-}
+  public void setRoleCode(String roleCode) {
+    this.roleCode = roleCode;
+  }
 
-@Column(name = "role_name")
+  @Column(name = "role_name")
   private String roleName;
-  
-  @Column(name="role_code")
+
+  @Column(name = "role_code")
   private String roleCode;
 }

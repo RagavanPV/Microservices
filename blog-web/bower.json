@@ -1,25 +1,25 @@
 {
-  "name": "blog",
-  "description": "A sample blog application",
-  "authors": [
-    "RagavanPV <ragav87@ymail.com>"
-  ],
-  "license": "MIT",
-  "homepage": "https://github.com/ragavanpv",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "bootstrap": "v4.0.0-alpha.6",
-    "font-awesome": "^4.7.0",
-    "tinymce": "tinymce-dist#^4.7.4",
-    "kjur-jsrsasign": "jsrsasign#^8.0.4",
-    "animate.css": "^3.5.2"
-  },
-  "devDependencies": {}
+    "name": "blog",
+    "description": "A sample blog application",
+    "authors": [
+        "RagavanPV <ragav87@ymail.com>"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/ragavanpv",
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "bootstrap": "v4.0.0-alpha.6",
+        "font-awesome": "^4.7.0",
+        "tinymce": "tinymce-dist#^4.7.4",
+        "kjur-jsrsasign": "jsrsasign#^8.0.4",
+        "animate.css": "^3.5.2"
+    },
+    "devDependencies": {}
 }

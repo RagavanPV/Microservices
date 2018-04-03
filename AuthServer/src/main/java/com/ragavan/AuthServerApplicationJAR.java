@@ -10,8 +10,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableDiscoveryClient
 @EnableAuthorizationServer
 public class AuthServerApplicationJAR {
-	
-	public static void main(String[] args) {
-		SpringApplication.run(AuthServerApplicationJAR.class, args);
-	}
+
+  public static void main(String[] args) {
+    SpringApplication.run(AuthServerApplicationJAR.class, args);
+  }
 }
