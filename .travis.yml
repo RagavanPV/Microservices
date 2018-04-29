@@ -3,4 +3,4 @@ jdk: oraclejdk8
 services: mysql
 script: 
     - cd ConfigurationServer
-    -./gradlew clean install
+    - ./gradlew clean install
