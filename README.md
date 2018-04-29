@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/RagavanPV/Microservices.svg?branch=master)](https://travis-ci.org/RagavanPV/Microservices)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/RagavanPV/Microservices/blob/master/LICENCE)
 # Microservices
 
