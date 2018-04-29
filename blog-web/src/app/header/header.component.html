@@ -16,30 +16,36 @@
           <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbRippleRadius>Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbRippleRadius>Pricing</a>
-      </li>
     </ul>
     <!-- Links -->
 
     <ul class="navbar-nav">
+      <li class="nav-item">
+          <a class="nav-link waves-light" *ngIf="!auth.isLoggedIn()" routerLink="/login" mdbRippleRadius>Login</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link waves-light" *ngIf="!auth.isLoggedIn()" routerLink="/register" mdbRippleRadius>Register</a>
+      </li>
     <!-- Dropdown -->
-    <li class="nav-item dropdown" dropdown>
+    <li class="nav-item dropdown" *ngIf="auth.isLoggedIn()" dropdown>
       <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
         Basic dropdown
         <span class="caret"></span>
       </a>
       <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-        <a class="dropdown-item waves-light" mdbRippleRadius href="#">Action</a>
-        <a class="dropdown-item waves-light" mdbRippleRadius href="#">Another action</a>
-        <a class="dropdown-item waves-light" mdbRippleRadius href="#">Something else here</a>
+        <a class="dropdown-item waves-light" mdbRippleRadius href="#">Profile</a>
         <div class="divider dropdown-divider"></div>
-        <a class="dropdown-item waves-light" mdbRippleRadius href="#">Separated link</a>
+        <a class="dropdown-item waves-light" mdbRippleRadius (click)="logout()">Logout</a>
       </div>
     </li>
+    <li class="nav-item dropdown" *ngIf="auth.isLoggedIn()" dropdown>
+        <a dropdownToggle mdbRippleRadius type="button" class="nav-link waves-light" mdbRippleRadius>
+          <i class="fa fa-bell"></i>
+        </a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary">
+          <div style="text-align:center">No notifications</div>
+        </div>
+      </li>
 </ul>   
   </links>
   <!-- Collapsible content -->

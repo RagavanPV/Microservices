@@ -2,7 +2,8 @@ import { customValidators } from './../Validators/custom.validators';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl,Validators } from "@angular/forms";
 import { Http } from '@angular/http';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../services/AuthenticationService/authentication.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth: AuthenticationService) { }
+  constructor(private router:Router,private auth: AuthenticationService) { }
 
   ngOnInit() {
   }
@@ -26,7 +27,13 @@ export class LoginComponent implements OnInit {
 
   login() {
     console.log(this.loginForm.value);
-    this.auth.login(this.loginForm.value);
+    var isAuthenticated = this.auth.login(this.loginForm.value).subscribe((data:any) =>{
+      console.log(data);
+      if(data)
+      this.router.navigate(['/']);
+    });
   }
+
+  
   
 }

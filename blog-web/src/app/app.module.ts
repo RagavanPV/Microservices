@@ -5,8 +5,8 @@ import { HttpModule } from "@angular/http";
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-
-import { AuthenticationService } from './services/authentication.service';
+import { AuthenticationGuard } from './guards/authentication.guard';
+import { AuthenticationService } from './services/AuthenticationService/authentication.service';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -42,7 +42,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HttpClientModule,
     MDBBootstrapModule.forRoot()
   ],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService,AuthenticationGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operator/map';
+import { error } from 'selenium-webdriver';
 @Injectable()
 export class AuthenticationService {
   constructor(private http: HttpClient) { }
@@ -17,9 +19,14 @@ login(details) {
   body.set('client_id', 'admin');
   body.set('username', details.email);
   body.set('password', details.password);
-  console.log(body.get('grant_type'));
    return this.http.post('http://localhost:8001/oauth/token', body.toString(), {headers: headers}).
-    subscribe((data) => console.log(data));
+    map((data: any) => {
+      console.log(data.access_token);
+      if(data && data.access_token){
+        localStorage.setItem('token',data.access_token);
+        return true;
+      }
+    });
   }
   encode(input) {
     const keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
@@ -50,4 +57,16 @@ login(details) {
     } while (i < input.length);
     return output;
   }
+
+  getToken() {
+    return localStorage.getItem("token")
+  }
+
+  isLoggedIn() {
+    return this.getToken() !== null;
+  }
+  logout() {
+    localStorage.removeItem("token");
+  }
+
 }
