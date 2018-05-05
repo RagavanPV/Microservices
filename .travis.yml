@@ -4,5 +4,6 @@ services: mysql
 script: 
     - cd ConfigurationServer
     - ./gradlew clean build
+    - cd ..
     - cd APIGateway
     - ./gradlew clean build
