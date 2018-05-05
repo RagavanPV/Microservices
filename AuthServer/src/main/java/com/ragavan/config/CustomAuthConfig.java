@@ -1,5 +1,6 @@
 package com.ragavan.config;
 
+import com.ragavan.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,23 +13,21 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
-import com.ragavan.service.CustomUserDetailsService;
-
 @Configuration
 @Order(1)
 public class CustomAuthConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired private CustomUserDetailsService userDetailsService;
-  
+
   @Override
   protected void configure(HttpSecurity http) throws Exception {
 
-      http.requestMatchers()
-              .antMatchers("/oauth/authorize")
-              .and()
-              .authorizeRequests()
-              .anyRequest()
-              .authenticated();
+    http.requestMatchers()
+        .antMatchers("/oauth/authorize")
+        .and()
+        .authorizeRequests()
+        .anyRequest()
+        .authenticated();
   }
 
   @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
