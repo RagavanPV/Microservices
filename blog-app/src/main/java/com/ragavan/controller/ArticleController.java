@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/article/")
-@PreAuthorize("hasRole('ROLE_USER')")
+@PreAuthorize("hasAuthority('ROLE_USER')")
 public class ArticleController {
   @Autowired private ArticleDAO articleDAO;
 
