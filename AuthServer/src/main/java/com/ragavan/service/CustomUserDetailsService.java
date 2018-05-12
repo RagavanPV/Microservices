@@ -5,6 +5,7 @@ import com.ragavan.data.UserDAO;
 import com.ragavan.model.CustomUserDetail;
 import com.ragavan.model.User;
 import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,14 +19,21 @@ public class CustomUserDetailsService implements UserDetailsService {
 
   @Autowired private UserDAO userDao;
 
+  @Autowired private LoginAttemptService loginAttemptService;
+
+  @Autowired private HttpServletRequest request;
+
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    String ip = getClientIP();
+    if (loginAttemptService.isBlocked(ip)) {
+      throw new RuntimeException("blocked");
+    }
     UsernamePasswordAuthenticationToken authentication =
         (UsernamePasswordAuthenticationToken)
             SecurityContextHolder.getContext().getAuthentication();
     org.springframework.security.core.userdetails.User user =
         (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
-    String userName = user.getUsername();
     if (ClientConstants.FRONTEND.equals(user.getUsername())) {
       Optional<User> userOptional = userDao.findByUserName(username);
       if (userOptional.isPresent()) {
@@ -43,5 +51,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     } else {
       throw new UsernameNotFoundException("User name not found");
     }
+  }
+
+  private String getClientIP() {
+    String xfHeader = request.getHeader("X-Forwarded-For");
+    if (xfHeader == null) {
+      return request.getRemoteAddr();
+    }
+    return xfHeader.split(",")[0];
   }
 }

@@ -1,9 +1,8 @@
 package com.ragavan.config;
 
+import com.ragavan.service.CustomUserDetailsService;
 import java.util.Arrays;
-
 import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +19,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
-import com.ragavan.service.CustomUserDetailsService;
-
 @Configuration
 public class JWTConfig extends AuthorizationServerConfigurerAdapter {
   @Autowired private AuthenticationManager authenticationManager;
@@ -36,16 +33,16 @@ public class JWTConfig extends AuthorizationServerConfigurerAdapter {
         .tokenKeyAccess("isAnonymous() || hasAuthority('ROLE_TRUSTED')")
         .checkTokenAccess("isAuthenticated()");
   }
+
   @Bean
   public TokenEnhancer tokenEnhancer() {
-      return new CustomTokenEnhancer();
+    return new CustomTokenEnhancer();
   }
 
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-	  TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-      tokenEnhancerChain.setTokenEnhancers(
-        Arrays.asList(tokenEnhancer(), jwtAccessTokenConverter()));
+    TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+    tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer(), jwtAccessTokenConverter()));
     endpoints
         .tokenStore(tokenStore())
         .tokenEnhancer(tokenEnhancerChain)
