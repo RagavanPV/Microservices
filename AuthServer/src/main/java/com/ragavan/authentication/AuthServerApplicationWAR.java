@@ -1,4 +1,4 @@
-package com.ragavan;
+package com.ragavan.authentication;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;

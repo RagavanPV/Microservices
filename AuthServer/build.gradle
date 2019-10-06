@@ -18,7 +18,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'war'
 apply plugin: "com.diffplug.gradle.spotless"
 
-group = 'com.ragavan'
+group = 'com.ragavan.authentication'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
@@ -39,6 +39,7 @@ configurations {
 
 ext {
 	springCloudVersion = 'Edgware.RELEASE'
+	lombokVersion = '1.18.8'
 }
 
 dependencies {
@@ -48,14 +49,20 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.cloud:spring-cloud-starter-oauth2')
 	compile('org.springframework.cloud:spring-cloud-starter-security')
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	runtime('org.springframework.boot:spring-boot-devtools')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	
-	compile('org.springframework.security: spring-security-jwt: 1.0.9.RELEASE')
 	
 	compile('mysql:mysql-connector-java:6.0.6')
 	compile('org.springframework:spring-jdbc')
 	compile('org.apache.commons:commons-dbcp2:2.2.0')
+
+	providedCompile  "org.projectlombok:lombok:${lombokVersion}"
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+	providedCompile group: 'org.hibernate', name: 'hibernate-jpamodelgen', version: '5.4.2.Final'
+	annotationProcessor group: 'org.hibernate', name: 'hibernate-jpamodelgen', version: '5.4.2.Final'
+	compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-hibernate5', version: '2.9.9'
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
