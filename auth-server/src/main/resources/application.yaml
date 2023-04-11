@@ -1,0 +1,40 @@
+server:
+  port: 9000
+
+logging:
+  level:
+    root: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
+    org.springframework.boot.autoconfigure: DEBUG
+
+# Get server info
+info:
+  server: ${spring.application.name} is running at ${server.port}
+
+security:
+  basic:
+    enable: false
+
+management:
+  endpoints:
+    jmx:
+      exposure:
+        include: health,info,env,beans
+
+# DataSource Connection Settings
+spring:
+  application:
+    name: auth-server
+  datasource:
+    url: jdbc:mysql://localhost:3306/oauth_auth_database?autoReconnect=true&zeroDateTimeBehavior=convertToNull
+    username: root
+    tomcat:
+      max-active: 3
+      max-idle: 3
+      min-idle: 1
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect

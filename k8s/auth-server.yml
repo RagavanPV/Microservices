@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-deployment
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      auth: server
+  template:
+    metadata:
+      labels:
+        auth: server
+    spec:
+      containers:
+        - name: auth-server
+          image: auth-server:latest
+          imagePullPolicy: Never
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-entrypoint
+  namespace: production
+spec:
+  type: NodePort
+  selector:
+    auth: server
+  ports:
+    - port: 9000
+      targetPort: 9000
+      nodePort: 30001
